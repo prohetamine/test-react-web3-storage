@@ -3134,10 +3134,10 @@ react-refresh@^0.18.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.18.0.tgz#2dce97f4fe932a4d8142fa1630e475c1729c8062"
   integrity sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==
 
-react-web3-storage@1.0.61:
-  version "1.0.61"
-  resolved "https://registry.yarnpkg.com/react-web3-storage/-/react-web3-storage-1.0.61.tgz#674424dede1a2bab65f5ea67307052da427f7cff"
-  integrity sha512-EDTKQanB2ap4lIDvRP8mOzmzFJld0sQ/g1P8GEpSFuLLYH7EsMhh9Ktk7P53d8MbEdphJnX8cnzroeS4zUmFVA==
+react-web3-storage@1.0.63:
+  version "1.0.63"
+  resolved "https://registry.yarnpkg.com/react-web3-storage/-/react-web3-storage-1.0.63.tgz#7967fc27de8f1d566de1322b91eb48b99dd5e70b"
+  integrity sha512-h9BfCV/nu4QQfXj+Ze0Iu6WjVQmh0wcWwgb+ZTVnFJgxvPmYqnKMG7qH68utxm2z45h3jdj2Tj16gFm5fI752w==
   dependencies:
     "@reown/appkit" "^1.8.16"
     "@reown/appkit-adapter-ethers" "^1.8.16"
