@@ -98,7 +98,7 @@ const App = () => {
       <button onClick={() => open()}>{isConnect ? 'wallet' : 'connect'}</button>
       <InputPrivateText id='1' placeholder='private text' />
       <InputPublicText id='1' placeholder='public text' />
-      <PublicText id='1' address='0x14dC79964da2C08b23698B3D3cc7Ca32193d9955' />
+      <PublicText id='1' address='0xbcfA1b80C39F9a378b12b257934BE409Bc93eC60' />
       <InputTableText id='1' />
       <InputTableText id='2' />
     </Body>
