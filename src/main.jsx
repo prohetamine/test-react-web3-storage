@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
-import * as Web3Vote from '/Users/stas/Desktop/react-web3-vote'
 import App from './App.jsx'
 import './index.css'
 
@@ -19,10 +18,8 @@ const config = {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Web3Vote.Provider config={config}>
-      <Web3.Provider config={config}>
-        <App />
-      </Web3.Provider>
-    </Web3Vote.Provider>
+    <Web3.Provider config={config}>
+       <App />
+    </Web3.Provider>
   </StrictMode>
 )

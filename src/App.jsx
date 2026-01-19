@@ -389,19 +389,6 @@ const VoteOnce = ({ id }) => {
 
 const App = () => {
   const [isConnect, open] = Web3.useApp()
-  const [isConnect2, open2] = Web3Vote.useApp()
-
-  console.log(isConnect, isConnect2)
-  
-  // useSplitVote
-  /*return (
-    <Body>
-      <WalletButton onClick={() => open()}>{isConnect ? 'wallet' : 'connect'}</WalletButton>
-      <InputPrivateText id='1' placeholder='private text' />
-      <InputPublicText id='1' placeholder='public text' />
-      <PublicText id='1' address={process.env.NODE_ENV === 'development' ? '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' : '0xbcfA1b80C39F9a378b12b257934BE409Bc93eC60'} />
-    </Body>
-  )*/
 
   return (
     <Body>
