@@ -5,14 +5,129 @@
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import * as Web3 from 'react-web3-storage'
+import { motion } from 'framer-motion'
 
 const Body = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`
+
+const WalletButton = styled(motion.div)`
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  min-width: 100px;
+  background-color: #EAFF00;
+  color: #444;
+  padding: 10px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: "SUSE Mono", sans-serif;
+  cursor: pointer;
+  transform: translate(0px, 0px);
+  box-shadow: 5px 5px 0 0 rgba(0, 0, 0, 0.25);
+`
+
+const Title = styled.div`
+  margin: 10px;
+  margin-bottom: 5px;
+  color: #000;
+  font-family: "SUSE Mono", sans-serif;
+  font-size: 18px;
+`
+
+const Input = styled(motion.input)`
+  width: 100%;
+  margin: 5px;
+  background-color: #fff;
+  color: #444;
+  padding: 5px 9px;
+  border: 3px solid #00000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: "SUSE Mono", sans-serif;
+  cursor: pointer;
+  transform: translate(0px, 0px);
+  box-shadow: 5px 5px 0 0 rgba(0, 0, 0, 0.25);
+  outline: none;
+`
+
+const Button = styled(motion.button)`
+  margin: 5px;
+  background-color: #fff;
+  color: #444;
+  padding: 5px 9px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: "SUSE Mono", sans-serif;
+  cursor: pointer;
+  transform: translate(0px, 0px);
+  box-shadow: 5px 5px 0 0 rgba(0, 0, 0, 0.25);
+  outline: none;
+`
+
+const Data = styled.div`
+  margin: 5px;
+  width: 400px;
+  background-color: #dddddd;
+  color: #444;
+  padding: 5px 9px;
+  border: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: "SUSE Mono", sans-serif;
+  outline: none;
+  overflow-wrap: break-word; 
+  word-break: normal; 
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+`
+
+const Overflow = styled.div`
+  min-width: 100px;
+  background-color: #9a9a9aff;
+  padding: 5px;
+  border-radius: 4px;
+  transform: translate(0px, 0px);
+  box-shadow: 5px 5px 0 0 rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+`
+
+const Info = styled.div`
+  margin: 5px;
+  width: 400px;
+  background-color: #787878ff;
+  color: #444;
+  padding: 5px 9px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  border-radius: 4px;
+  font-family: "SUSE Mono", sans-serif;
+  outline: none;
+  overflow-wrap: break-word; 
+  word-break: normal; 
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 `
 
 const InputPrivateText = ({ id, onChange, placeholder }) => {
@@ -25,11 +140,33 @@ const InputPrivateText = ({ id, onChange, placeholder }) => {
   }, [state, onChange])
 
   return (
-    <div style={{ display: 'flex' }}>
-      <input disabled={status.type === 'load' ||status.type === 'connect' || status.type === 'upload'} type="text" placeholder={placeholder} value={state} onChange={({ target: { value } }) => setState(value)} />
-      <button onClick={() => updateState()}>Save</button>
-      <div>{JSON.stringify(status)}</div>
-    </div>
+    <Overflow>
+      <Title>Private Text</Title>
+      <div style={{ display: 'flex' }}>
+        <Input 
+          initial={{ border: '3px solid #00000000' }}
+          animate={{ 
+            border: status.type === 'loaded' 
+                      ? ['3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)']
+                      : status.type === 'load' 
+                        ? ['3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                        : status.type === 'connected' 
+                            ? ['3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                            : status.type === 'error' 
+                                ? ['3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                                : '3px solid #00000000'
+          }}
+          transition={{ duration: 1, times: [0, 0.3, 0.6, 1] }}
+          disabled={status.type === 'load' || status.type === 'connect' || status.type === 'upload'} 
+          type="text" 
+          placeholder={placeholder} 
+          value={state} 
+          onChange={({ target: { value } }) => setState(value)}
+        />
+        <Button onClick={() => updateState()}>Save</Button>
+      </div>
+      <Info>{JSON.stringify(status)}</Info>
+    </Overflow>
   )
 }
 
@@ -43,11 +180,33 @@ const InputPublicText = ({ id, onChange, placeholder }) => {
   }, [state, onChange])
 
   return (
-    <div style={{ display: 'flex' }}>
-      <input disabled={status.type === 'load' ||status.type === 'connect' || status.type === 'upload'} type="text" placeholder={placeholder} value={state} onChange={({ target: { value } }) => setState(value)} />
-      <button onClick={() => updateState()}>Save</button>
-      <div>{JSON.stringify(status)}</div>
-    </div>
+    <Overflow>
+      <Title>Public Text</Title>
+      <div style={{ display: 'flex' }}>
+        <Input 
+          initial={{ border: '3px solid #00000000' }}
+          animate={{ 
+            border: status.type === 'loaded' 
+                      ? ['3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)']
+                      : status.type === 'load' 
+                        ? ['3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                        : status.type === 'connected' 
+                            ? ['3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                            : status.type === 'error' 
+                                ? ['3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                                : '3px solid #00000000'
+          }}
+          transition={{ duration: 1, times: [0, 0.3, 0.6, 1] }}
+          disabled={status.type === 'load' || status.type === 'connect' || status.type === 'upload'} 
+          type="text" 
+          placeholder={placeholder} 
+          value={state} 
+          onChange={({ target: { value } }) => setState(value)}
+        />
+        <Button onClick={() => updateState()}>Save</Button>
+      </div>
+      <Info>{JSON.stringify(status)}</Info>
+    </Overflow>
   )
 }
 
@@ -55,7 +214,12 @@ const PublicText = ({ id, address }) => {
   const [state, status] = Web3.useReadStorage(id, address)
 
   return (
-    <div style={{ display: 'flex' }}>{state}, {JSON.stringify(status)}</div>
+    <Overflow>
+      <Title>Public Text (read)</Title>
+      <Data style={{ background: '#fff' }}>From: {address}</Data>
+      <Data>{state}</Data>
+      <Info>{JSON.stringify(status)}</Info>
+    </Overflow>
   )
 }
 
@@ -64,29 +228,47 @@ const InputTableText = ({ id }) => {
   const [items, addItem, updateItem, status] = Web3.useTableStorage(id)
 
   return (
-    <div>
+    <Overflow>
+      <Title>Table Text (id{id})</Title>
       <div style={{ display: 'flex' }}>
-        <input placeholder={`table id: ${id}`} type="text" value={state} onChange={({ target: { value } }) => setState(value)} />
-        <button onClick={() => addItem(state)}>Add</button>
+        <Input 
+          initial={{ border: '3px solid #00000000' }}
+          animate={{ 
+            border: status.type === 'loaded' 
+                      ? ['3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)']
+                      : status.type === 'load' 
+                        ? ['3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                        : status.type === 'connected' 
+                            ? ['3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                            : status.type === 'error' 
+                                ? ['3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                                : '3px solid #00000000'
+          }}
+          transition={{ duration: 1, times: [0, 0.3, 0.6, 1] }}
+          disabled={status.type === 'load' || status.type === 'connect' || status.type === 'upload'} 
+          type="text" 
+          value={state} 
+          onChange={({ target: { value } }) => setState(value)}
+        />
+        <Button onClick={() => addItem(state)}>Save</Button>
       </div>
-      <div>{JSON.stringify(status)}</div>
-      <br />
+      <Info>{JSON.stringify(status)}</Info>
       <div>
         {
           status.type !== 'connect' 
             ? (
               items.filter(item => !item.isDelete).map(item => (
-                <div key={item.index}>
-                  {item.index} {item.text}
-                  <button onClick={() => updateItem(item.index, "new string!")}>edit</button>
-                  <button onClick={() => updateItem(item.index, "")}>delete</button>
-                </div>
+                <Data key={item.index}>
+                  text: {item.text} (index: {item.index} addr: {item.address.slice(0, 5)})
+                  <Button onClick={() => updateItem(item.index, "new string!")}>edit</Button>
+                  <Button onClick={() => updateItem(item.index, "")}>delete</Button>
+                </Data>
               ))
             )
             : null
         }
       </div>
-    </div>
+    </Overflow>
   )
 }
 
@@ -95,10 +277,10 @@ const App = () => {
 
   return (
     <Body>
-      <button onClick={() => open()}>{isConnect ? 'wallet' : 'connect'}</button>
+      <WalletButton onClick={() => open()}>{isConnect ? 'wallet' : 'connect'}</WalletButton>
       <InputPrivateText id='1' placeholder='private text' />
       <InputPublicText id='1' placeholder='public text' />
-      <PublicText id='1' address='0xbcfA1b80C39F9a378b12b257934BE409Bc93eC60' />
+      <PublicText id='1' address={process.env.NODE_ENV === 'development' ? '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' : '0xbcfA1b80C39F9a378b12b257934BE409Bc93eC60'} />
       <InputTableText id='1' />
       <InputTableText id='2' />
     </Body>

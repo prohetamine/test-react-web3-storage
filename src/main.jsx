@@ -12,7 +12,8 @@ const config = {
     icons: ['https://prohetamine.github.io/react-web3-storage/icon.svg']
   },
   projectId: '1febfd92481d4ea997711d2ac4a363c0',
-  defaultNetwork: 'bnb'
+  host: window.location.host+'/react-web3-storage/',
+  defaultNetwork: process.env.NODE_ENV === 'development' ? Web3.config.blockChainsData[0].name : 'bnb'
 }
 
 createRoot(document.getElementById('root')).render(
