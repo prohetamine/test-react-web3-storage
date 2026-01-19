@@ -45,6 +45,7 @@ const Title = styled.div`
 
 const Input = styled(motion.input)`
   width: 100%;
+  box-sizing: border-box;
   margin: 5px;
   background-color: #fff;
   color: #444;
@@ -80,7 +81,7 @@ const Button = styled(motion.button)`
   outline: none;
 `
 
-const Data = styled.div`
+const Data = styled(motion.div)`
   margin: 5px;
   width: 400px;
   background-color: #dddddd;
@@ -100,7 +101,7 @@ const Data = styled.div`
   overflow-wrap: anywhere;
 `
 
-const Overflow = styled.div`
+const Overflow = styled(motion.div)`
   min-width: 100px;
   background-color: #9a9a9aff;
   padding: 5px;
@@ -110,7 +111,7 @@ const Overflow = styled.div`
   margin-bottom: 20px;
 `
 
-const Info = styled.div`
+const Info = styled(motion.div)`
   margin: 5px;
   width: 400px;
   background-color: #787878ff;
@@ -210,14 +211,36 @@ const InputPublicText = ({ id, onChange, placeholder }) => {
   )
 }
 
-const PublicText = ({ id, address }) => {
+const PublicText = ({ id, address: _address }) => {
+  const [address, setAddress] = useState(_address)
   const [state, status] = Web3.useReadStorage(id, address)
 
   return (
     <Overflow>
       <Title>Public Text (read)</Title>
-      <Data style={{ background: '#fff' }}>From: {address}</Data>
-      <Data>{state}</Data>
+      <div style={{ display: 'flex' }}>
+        <Input
+          type="text" 
+          placeholder={'Address... 0x0000'} 
+          value={address} 
+          onChange={({ target: { value } }) => setAddress(value)}
+        />  
+      </div>
+      <Data
+        initial={{ border: '3px solid #00000000' }}
+        animate={{ 
+          border: status.type === 'loaded' 
+                    ? ['3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)']
+                    : status.type === 'load' 
+                      ? ['3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                      : status.type === 'connected' 
+                          ? ['3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                          : status.type === 'error' 
+                              ? ['3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                              : '3px solid #00000000'
+        }}
+        transition={{ duration: 1, times: [0, 0.3, 0.6, 1] }}
+      >{state}</Data>
       <Info>{JSON.stringify(status)}</Info>
     </Overflow>
   )
@@ -228,23 +251,24 @@ const InputTableText = ({ id }) => {
   const [items, addItem, updateItem, status] = Web3.useTableStorage(id)
 
   return (
-    <Overflow>
+    <Overflow
+      initial={{ border: '3px solid #00000000' }}
+      animate={{ 
+        border: status.type === 'loaded' 
+                  ? ['3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)']
+                  : status.type === 'load' 
+                    ? ['3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                    : status.type === 'connected' 
+                        ? ['3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                        : status.type === 'error' 
+                            ? ['3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)'] 
+                            : '3px solid #00000000'
+      }}
+      transition={{ duration: 1, times: [0, 0.3, 0.6, 1] }}
+    >
       <Title>Table Text (id{id})</Title>
       <div style={{ display: 'flex' }}>
         <Input 
-          initial={{ border: '3px solid #00000000' }}
-          animate={{ 
-            border: status.type === 'loaded' 
-                      ? ['3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(65, 206, 0, 1)', '3px solid rgba(20, 199, 0, 0)']
-                      : status.type === 'load' 
-                        ? ['3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 205, 0, 1)', '3px solid rgba(20, 199, 0, 0)'] 
-                        : status.type === 'connected' 
-                            ? ['3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(0, 124, 232, 1)', '3px solid rgba(20, 199, 0, 0)'] 
-                            : status.type === 'error' 
-                                ? ['3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)', '3px solid rgba(232, 0, 31, 1)', '3px solid rgba(20, 199, 0, 0)'] 
-                                : '3px solid #00000000'
-          }}
-          transition={{ duration: 1, times: [0, 0.3, 0.6, 1] }}
           disabled={status.type === 'load' || status.type === 'connect' || status.type === 'upload'} 
           type="text" 
           value={state} 
