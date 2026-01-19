@@ -304,7 +304,7 @@ const InputTableText = ({ id }) => {
                   <span>
                     {item.text}
                     <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)})</span>
-                    <SButton onClick={() => updateItem(item.index, "new string!")}>edit</SButton>
+                    <SButton onClick={() => updateItem(item.index, state)}>edit</SButton>
 
                   
                   <SButton onClick={() => updateItem(item.index, "")}>delete</SButton>
