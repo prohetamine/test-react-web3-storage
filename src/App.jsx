@@ -4,7 +4,8 @@
 
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
-import * as Web3 from 'react-web3-storage'
+import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
+import * as Web3Vote from '/Users/stas/Desktop/react-web3-vote'
 import { motion } from 'framer-motion'
 
 const Body = styled.div`
@@ -160,7 +161,7 @@ const InputPrivateText = ({ id, onChange, placeholder }) => {
 
   return (
     <Overflow>
-      <Title>Private Text</Title>
+      <Title>usePrivateStorage</Title>
       <div style={{ display: 'flex' }}>
         <Input 
           initial={{ border: '3px solid #00000000' }}
@@ -200,7 +201,7 @@ const InputPublicText = ({ id, onChange, placeholder }) => {
 
   return (
     <Overflow>
-      <Title>Public Text</Title>
+      <Title>useStorage</Title>
       <div style={{ display: 'flex' }}>
         <Input 
           initial={{ border: '3px solid #00000000' }}
@@ -235,7 +236,7 @@ const PublicText = ({ id, address: _address }) => {
 
   return (
     <Overflow>
-      <Title>Public Text (read)</Title>
+      <Title>useReadStorage</Title>
       <div style={{ display: 'flex' }}>
         <Input
           type="text" 
@@ -284,7 +285,7 @@ const InputTableText = ({ id }) => {
       }}
       transition={{ duration: 1, times: [0, 0.3, 0.6, 1] }}
     >
-      <Title>Table Text (id{id})</Title>
+      <Title>useTableStorage</Title>
       <div style={{ display: 'flex' }}>
         <Input 
           disabled={status.type === 'load' || status.type === 'connect' || status.type === 'upload'} 
@@ -319,9 +320,80 @@ const InputTableText = ({ id }) => {
   )
 }
 
+const Vote = ({ id }) => {
+  const [votes, setVote, status] = Web3Vote.useVote(id)
+
+  return (
+    <Overflow>
+      <Title>useVote</Title>
+      <div style={{ display: 'flex' }}>
+        <Button onClick={() => setVote()}>Click: {votes}</Button>
+      </div>
+      <Info>{JSON.stringify(status)}</Info>
+    </Overflow>
+  )
+}
+
+const VoteSplit = ({ id }) => {
+  const [votes, setVote, status] = Web3Vote.useSplitVote(id, "0x14dC79964da2C08b23698B3D3cc7Ca32193d9955")
+
+  return (
+    <Overflow>
+      <Title>useSplitVote</Title>
+      <div style={{ display: 'flex' }}>
+        <Button onClick={() => setVote()}>Click if you love mom, clicks: {votes}</Button>
+      </div>
+      <Info>{JSON.stringify(status)}</Info>
+    </Overflow>
+  )
+}
+
+const VoteOnce = ({ id }) => {
+  const [likeVotes, setLikeVote, likeStatus] = Web3Vote.useVoteOnce(`like-${id}`)
+      , [dislikeVotes, setDislikeVote, dislikestatus] = Web3Vote.useVoteOnce(`dislike-${id}`)
+
+  return (
+    <Overflow>
+      <Title>useVoteOnce</Title>
+      <div style={{ display: 'flex' }}>
+        {
+          likeVotes.hasVote && dislikeVotes.hasVote
+            ? (
+              <>
+                <Button onClick={() => setLikeVote()}>{likeVotes.count} 👍</Button>
+                <Button onClick={() => setDislikeVote()}>{dislikeVotes.count} 👎</Button>
+              </>
+            )
+            : null
+        }
+        {
+          !likeVotes.hasVote 
+            ? (
+              <Button onClick={() => setLikeVote()}>{likeVotes.count} 👍</Button>
+            )
+            : null
+        }
+        {
+          !dislikeVotes.hasVote
+            ? (
+              <Button onClick={() => setDislikeVote()}>{dislikeVotes.count} 👎</Button>
+            )
+            : null
+        }
+      </div>
+      <Info>{JSON.stringify(likeStatus)}</Info>
+      <Info>{JSON.stringify(dislikestatus)}</Info>
+    </Overflow>
+  )
+}
+
 const App = () => {
   const [isConnect, open] = Web3.useApp()
+  const [isConnect2, open2] = Web3Vote.useApp()
 
+  console.log(isConnect, isConnect2)
+  
+  // useSplitVote
   /*return (
     <Body>
       <WalletButton onClick={() => open()}>{isConnect ? 'wallet' : 'connect'}</WalletButton>
@@ -334,10 +406,21 @@ const App = () => {
   return (
     <Body>
       <WalletButton onClick={() => open()}>{isConnect ? 'wallet' : 'connect'}</WalletButton>
+      <Vote id='1' />
+      <VoteSplit id="1" />
+      <VoteOnce id='3' />
+
       <InputPrivateText id='1' placeholder='private text' />
+      <InputPrivateText id='2' placeholder='private text' />
+      
       <InputPublicText id='1' placeholder='public text' />
       <PublicText id='1' address={process.env.NODE_ENV === 'development' ? '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' : '0xbcfA1b80C39F9a378b12b257934BE409Bc93eC60'} />
+      
+      <InputPublicText id='2' placeholder='public text' />
+      <PublicText id='2' address={process.env.NODE_ENV === 'development' ? '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' : '0xbcfA1b80C39F9a378b12b257934BE409Bc93eC60'} />
+      
       <InputTableText id='1' />
+      <InputTableText id='2' />
     </Body>
   )
 }
