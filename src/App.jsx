@@ -65,6 +65,7 @@ const Input = styled(motion.input)`
 
 const Button = styled(motion.button)`
   margin: 5px;
+  box-sizing: border-box;
   background-color: #fff;
   color: #444;
   padding: 5px 9px;
@@ -81,14 +82,30 @@ const Button = styled(motion.button)`
   outline: none;
 `
 
+const SButton = styled(motion.span)`
+  margin: 3px;
+  box-sizing: border-box;
+  background-color: #fff;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #444;
+  border: none;
+  font-size: 16px;
+  font-family: "SUSE Mono", sans-serif;
+  cursor: pointer;
+  outline: none;
+`
+
 const Data = styled(motion.div)`
   margin: 5px;
-  width: 400px;
+  width: 450px;
   background-color: #dddddd;
   color: #444;
-  padding: 5px 9px;
+  padding: 15px;
   border: none;
+  box-sizing: border-box;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
   font-size: 16px;
@@ -113,10 +130,11 @@ const Overflow = styled(motion.div)`
 
 const Info = styled(motion.div)`
   margin: 5px;
-  width: 400px;
+  width: 450px;
+  box-sizing: border-box;
   background-color: #787878ff;
   color: #444;
-  padding: 5px 9px;
+  padding: 15px;
   border: none;
   display: flex;
   justify-content: center;
@@ -283,9 +301,14 @@ const InputTableText = ({ id }) => {
             ? (
               items.filter(item => !item.isDelete).map(item => (
                 <Data key={item.index}>
-                  text: {item.text} (index: {item.index} addr: {item.address.slice(0, 5)})
-                  <Button onClick={() => updateItem(item.index, "new string!")}>edit</Button>
-                  <Button onClick={() => updateItem(item.index, "")}>delete</Button>
+                  <span>
+                    {item.text}
+                    <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)})</span>
+                    <SButton onClick={() => updateItem(item.index, "new string!")}>edit</SButton>
+
+                  
+                  <SButton onClick={() => updateItem(item.index, "")}>delete</SButton>
+                  </span>
                 </Data>
               ))
             )
