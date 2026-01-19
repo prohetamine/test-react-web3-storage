@@ -299,7 +299,7 @@ const InputTableText = ({ id }) => {
         {
           status.type !== 'connect' 
             ? (
-              items.filter(item => !item.isDelete).map(item => (
+              items.filter(item => !item.isDelete).map((item, key) => (
                 <Data key={item.index}>
                   <span>
                     {item.text}
@@ -322,6 +322,15 @@ const InputTableText = ({ id }) => {
 const App = () => {
   const [isConnect, open] = Web3.useApp()
 
+  /*return (
+    <Body>
+      <WalletButton onClick={() => open()}>{isConnect ? 'wallet' : 'connect'}</WalletButton>
+      <InputPrivateText id='1' placeholder='private text' />
+      <InputPublicText id='1' placeholder='public text' />
+      <PublicText id='1' address={process.env.NODE_ENV === 'development' ? '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' : '0xbcfA1b80C39F9a378b12b257934BE409Bc93eC60'} />
+    </Body>
+  )*/
+
   return (
     <Body>
       <WalletButton onClick={() => open()}>{isConnect ? 'wallet' : 'connect'}</WalletButton>
@@ -329,7 +338,6 @@ const App = () => {
       <InputPublicText id='1' placeholder='public text' />
       <PublicText id='1' address={process.env.NODE_ENV === 'development' ? '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' : '0xbcfA1b80C39F9a378b12b257934BE409Bc93eC60'} />
       <InputTableText id='1' />
-      <InputTableText id='2' />
     </Body>
   )
 }
