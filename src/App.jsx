@@ -396,6 +396,7 @@ const App = () => {
       <Vote id='1' />
       <VoteSplit id="1" />
       <VoteOnce id='3' />
+      <VoteOnce id='4' />
 
       <InputPrivateText id='1' placeholder='private text' />
       <InputPrivateText id='2' placeholder='private text' />
