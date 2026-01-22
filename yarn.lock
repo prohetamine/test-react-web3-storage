@@ -1303,12 +1303,13 @@ react-refresh@^0.18.0:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.18.0.tgz"
   integrity sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==
 
-react-web3-storage@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-web3-storage/-/react-web3-storage-1.1.0.tgz#eb92acc89ee013d2475c45a6db2583a3345e3d38"
-  integrity sha512-JA8vGYlufKWynPocE/JsBwZJPrZ/Ll/JwaMe3I7qXMMDy/yZ2yYn7r3h7oihfOkQ2wUOI/JcH0vSJ9wySPK95g==
+react-web3-storage@2.0.22:
+  version "2.0.22"
+  resolved "https://registry.yarnpkg.com/react-web3-storage/-/react-web3-storage-2.0.22.tgz#1dae60ff65f49f575f3f27d0ed6e8830c092d939"
+  integrity sha512-eKhu7cfH4MOhyBQ9OS9kt6jK5XCrDeHK/x2oYYDp2ii1DVmFa22ERGiBEoMRhruu4mPG82J2MUqpPMuLW2Zr9w==
   dependencies:
     p-queue "^9.1.0"
+    ws "^8.19.0"
 
 react@^19.2.0:
   version "19.2.3"
@@ -1478,6 +1479,11 @@ word-wrap@^1.2.5:
   version "1.2.5"
   resolved "https://registry.npmjs.org/word-wrap/-/word-wrap-1.2.5.tgz"
   integrity sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==
+
+ws@^8.19.0:
+  version "8.19.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.19.0.tgz#ddc2bdfa5b9ad860204f5a72a4863a8895fd8c8b"
+  integrity sha512-blAT2mjOEIi0ZzruJfIhb3nps74PRWTCz1IjglWEEpQl5XS/UNama6u2/rjFkDDouqr4L67ry+1aGIALViWjDg==
 
 yallist@^3.0.2:
   version "3.1.1"

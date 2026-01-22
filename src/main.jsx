@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
+import * as Web3 from 'react-web3-storage'
+//import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
 import App from './App.jsx'
 import './index.css'
 
@@ -12,8 +13,7 @@ const config = {
     icons: ['https://prohetamine.github.io/react-web3-storage/icon.svg']
   },
   projectId: '1febfd92481d4ea997711d2ac4a363c0',
-  host: window.location.host+'/react-web3-storage/',
-  defaultNetwork: process.env.NODE_ENV === 'development' ? Web3.config.blockChainsData[0].name : 'bnb'
+  host: window.location.host+'/react-web3-storage/'
 }
 
 createRoot(document.getElementById('root')).render(
