@@ -1303,10 +1303,10 @@ react-refresh@^0.18.0:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.18.0.tgz"
   integrity sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==
 
-react-web3-storage@2.0.22:
-  version "2.0.22"
-  resolved "https://registry.yarnpkg.com/react-web3-storage/-/react-web3-storage-2.0.22.tgz#1dae60ff65f49f575f3f27d0ed6e8830c092d939"
-  integrity sha512-eKhu7cfH4MOhyBQ9OS9kt6jK5XCrDeHK/x2oYYDp2ii1DVmFa22ERGiBEoMRhruu4mPG82J2MUqpPMuLW2Zr9w==
+react-web3-storage@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-web3-storage/-/react-web3-storage-2.0.3.tgz#db8db3f4c392494997d9eb4ad370c7a1dd22c678"
+  integrity sha512-UoC/T8ZybNHbSODxjxOW90ewjhWuCO2DHmp8ZhWp8/MICSI+tjSgFu7ijj+cwKLyPop2YTU7PSOt/7mFqtqHKw==
   dependencies:
     p-queue "^9.1.0"
     ws "^8.19.0"
