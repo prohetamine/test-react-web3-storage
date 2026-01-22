@@ -25,7 +25,7 @@ import {
 
 const App = () => {
   const { isConnected, open } = Web3.useApp()
-  const [section, setSection] = useState(0)
+  const [section, setSection] = useState(1)
 
   return (
     <Body>
