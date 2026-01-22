@@ -1,4 +1,4 @@
-import{c as k,v as c,i as p,O as h,E as x,L as m,m as $,_ as l,o as C,$ as N,Z as R,a as I,g as b,G as A,k as S,N as v,Q as g,s as y}from"./index-BsMns30z.js";const T=b`
+import{c as k,v as c,i as p,O as h,G as x,L as m,m as $,_ as l,o as C,$ as N,Z as R,a as I,g as b,q as A,k as q,N as v,Q as g,s as y}from"./index-CrL8NvNS.js";const S=b`
   button {
     width: 100%;
     display: flex;
@@ -69,7 +69,7 @@ import{c as k,v as c,i as p,O as h,E as x,L as m,m as $,_ as l,o as C,$ as N,Z a
       </button>
     `}networksTemplate(){const e=this.networkImages.slice(0,5);return l` <wui-flex class="networks">
       ${e?.map(o=>l` <wui-flex class="network-icon"> <wui-image src=${o}></wui-image> </wui-flex>`)}
-    </wui-flex>`}};d.styles=[A,S,T];f([v({type:Array})],d.prototype,"networkImages",void 0);f([v()],d.prototype,"text",void 0);d=f([y("wui-compatible-network")],d);const E=b`
+    </wui-flex>`}};d.styles=[A,q,S];f([v({type:Array})],d.prototype,"networkImages",void 0);f([v()],d.prototype,"text",void 0);d=f([y("wui-compatible-network")],d);const T=b`
   wui-compatible-network {
     margin-top: ${({spacing:e})=>e[4]};
     width: 100%;
@@ -128,4 +128,4 @@ import{c as k,v as c,i as p,O as h,E as x,L as m,m as $,_ as l,o as C,$ as N,Z a
       @click=${this.onReceiveClick.bind(this)}
       text="Only receive assets on these networks"
       .networkImages=${i}
-    ></wui-compatible-network>`}onReceiveClick(){R.push("WalletCompatibleNetworks")}onCopyClick(){try{this.address&&(I.copyToClopboard(this.address),p.showSuccess("Address copied"))}catch{p.showError("Failed to copy")}}};u.styles=E;w([g()],u.prototype,"address",void 0);w([g()],u.prototype,"profileName",void 0);w([g()],u.prototype,"network",void 0);u=w([y("w3m-wallet-receive-view")],u);export{u as W3mWalletReceiveView};
+    ></wui-compatible-network>`}onReceiveClick(){R.push("WalletCompatibleNetworks")}onCopyClick(){try{this.address&&(I.copyToClopboard(this.address),p.showSuccess("Address copied"))}catch{p.showError("Failed to copy")}}};u.styles=T;w([g()],u.prototype,"address",void 0);w([g()],u.prototype,"profileName",void 0);w([g()],u.prototype,"network",void 0);u=w([y("w3m-wallet-receive-view")],u);export{u as W3mWalletReceiveView};

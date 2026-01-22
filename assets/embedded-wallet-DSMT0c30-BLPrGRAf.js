@@ -1,4 +1,4 @@
-import{c as f,H as j,V as K,_ as c,J as T,L as V,e as L,a as P,D as G,Z as q,h as Q,z as x,v as h,B as N,f as X,b as z,d as _,o as S,$ as g,i as J,T as M,t as Z,r as ee,W as O,j as Y,Q as l,g as E,G as U,k as F,N as d,m as te,s as w}from"./index-BsMns30z.js";const oe=Y`
+import{c as f,H as j,V as K,_ as c,J as T,L as V,e as L,a as P,D as q,Z as G,h as Q,z as x,v as h,B as N,f as X,b as z,d as _,o as S,$ as g,i as J,T as M,t as Z,r as ee,W as O,j as Y,Q as l,g as E,q as U,k as F,N as d,m as te,s as w}from"./index-CrL8NvNS.js";const oe=Y`
   div {
     width: 100%;
   }
@@ -376,7 +376,7 @@ import{c as f,H as j,V as K,_ as c,J as T,L as V,e as L,a as P,D as G,Z as q,h a
       >
         ${this.onboardingTemplate()} ${this.buttonsTemplate()}
         <wui-link
-          @click=${()=>{P.openHref(G.URLS.FAQ,"_blank")}}
+          @click=${()=>{P.openHref(q.URLS.FAQ,"_blank")}}
         >
           Learn more
           <wui-icon color="inherit" slot="iconRight" name="externalLink"></wui-icon>
@@ -407,4 +407,4 @@ import{c as f,H as j,V as K,_ as c,J as T,L as V,e as L,a as P,D as G,Z as q,h a
       <wui-button fullWidth size="lg" borderRadius="xs" @click=${this.redirectToAccount.bind(this)}
         >Let's Go!
       </wui-button>
-    </wui-flex>`}redirectToAccount(){q.replace("Account")}};D.styles=ue;D=pe([w("w3m-register-account-name-success-view")],D);export{C as W3mApproveTransactionView,D as W3mRegisterAccountNameSuccess,p as W3mRegisterAccountNameView,$ as W3mSmartAccountSettingsView,W as W3mUpgradeWalletView};
+    </wui-flex>`}redirectToAccount(){G.replace("Account")}};D.styles=ue;D=pe([w("w3m-register-account-name-success-view")],D);export{C as W3mApproveTransactionView,D as W3mRegisterAccountNameSuccess,p as W3mRegisterAccountNameView,$ as W3mSmartAccountSettingsView,W as W3mUpgradeWalletView};
