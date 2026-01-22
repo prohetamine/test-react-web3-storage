@@ -1,4 +1,4 @@
-import{c as S,n as A,V as h,m as $,_ as n,v as d,J as E,d as u,a as b,L as C,p as O,t as P,Z as g,i as y,H as R,q as U,u as _,k,N as W,Q as c,w as F,W as D,x as N,y as q,C as z,s as I}from"./index-BCiuqpef.js";const G=k`
+import{c as S,l as A,V as h,m as $,_ as n,v as d,J as E,d as u,a as b,L as C,n as O,t as P,Z as g,i as y,H as R,p as U,q as _,g as k,N as W,Q as c,u as F,W as D,w as N,x as q,y as z,s as I}from"./index-BsMns30z.js";const G=k`
   :host {
     margin-top: ${({spacing:e})=>e[1]};
   }
