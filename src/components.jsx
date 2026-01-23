@@ -508,7 +508,7 @@ const ComissionCounter = ({ id }) => {
 
   return (
     <Overflow>
-      <Title>useCounter</Title>
+      <Title>stas.useCounter</Title>
       <div style={{ display: 'flex' }}>
         <Button onClick={() => setVote()}>Click if you love mom, click: {votes}</Button>
       </div>
@@ -576,7 +576,7 @@ const ComissionVote = ({ id }) => {
       
   return (
     <Overflow>
-      <Title>useVote</Title>
+      <Title>stas.useVote</Title>
       <div style={{ display: 'flex' }}>
         {
           likeVotes.hasVote && dislikeVotes.hasVote
@@ -614,7 +614,7 @@ const ComissionLike = ({ id }) => {
 
   return (
     <Overflow>
-      <Title>useLike</Title>
+      <Title>stas.useLike</Title>
       <div style={{ display: 'flex' }}>
         <Button onClick={() => setLike()}>Likes: {like.count} {like.hasLike ? '🤍' : '❤️'}</Button>
       </div>
