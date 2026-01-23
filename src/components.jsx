@@ -2,7 +2,9 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import * as Web3 from 'react-web3-storage'
+import * as Web3Vote from 'react-web3-vote'
 //import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
+//import * as Web3Vote from '/Users/stas/Desktop/react-web3-vote'
 
 const Body = styled.div`
   width: 100%;
@@ -416,7 +418,7 @@ const ComissionInputTableText = ({ id, placeholder }) => {
                 <Data key={key}>
                   <span>
                     {item.text}
-                    <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)})</span> 
+                    <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)} chainId: {item.chainId})</span> 
                     {
                       item.hasEdit 
                         ? (
@@ -479,7 +481,7 @@ const InputTableText = ({ id, placeholder }) => {
                 <Data key={key}>
                   <span>
                     {item.text}
-                    <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)})</span> 
+                    <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)} chainId: {item.chainId})</span> 
                     {
                       item.hasEdit 
                         ? (
@@ -501,26 +503,26 @@ const InputTableText = ({ id, placeholder }) => {
   )
 }
 
-const Vote = ({ id }) => {
-  const [votes, setVote, status] = Web3Vote.useVote(id)
+const ComissionCounter = ({ id }) => {
+  const [votes, setVote, status] = Web3Vote.stas.useCounter(id)
 
   return (
     <Overflow>
-      <Title>useVote</Title>
+      <Title>useCounter</Title>
       <div style={{ display: 'flex' }}>
-        <Button onClick={() => setVote()}>Click: {votes}</Button>
+        <Button onClick={() => setVote()}>Click if you love mom, click: {votes}</Button>
       </div>
       <Info>{JSON.stringify(status)}</Info>
     </Overflow>
   )
 }
 
-const VoteSplit = ({ id }) => {
-  const [votes, setVote, status] = Web3Vote.useSplitVote(id, "0x14dC79964da2C08b23698B3D3cc7Ca32193d9955")
+const Counter = ({ id }) => {
+  const [votes, setVote, status] = Web3Vote.useCounter(id)
 
   return (
     <Overflow>
-      <Title>useSplitVote</Title>
+      <Title>useCounter</Title>
       <div style={{ display: 'flex' }}>
         <Button onClick={() => setVote()}>Click if you love mom, clicks: {votes}</Button>
       </div>
@@ -529,13 +531,13 @@ const VoteSplit = ({ id }) => {
   )
 }
 
-const VoteOnce = ({ id }) => {
-  const [likeVotes, setLikeVote, likeStatus] = Web3Vote.useVoteOnce(`like-${id}`)
-      , [dislikeVotes, setDislikeVote, dislikestatus] = Web3Vote.useVoteOnce(`dislike-${id}`)
+const Vote = ({ id }) => {
+  const [likeVotes, setLikeVote, likeStatus] = Web3Vote.useVote(`like-${id}`)
+      , [dislikeVotes, setDislikeVote, dislikestatus] = Web3Vote.useVote(`dislike-${id}`)
 
   return (
     <Overflow>
-      <Title>useVoteOnce</Title>
+      <Title>useVote</Title>
       <div style={{ display: 'flex' }}>
         {
           likeVotes.hasVote && dislikeVotes.hasVote
@@ -568,10 +570,77 @@ const VoteOnce = ({ id }) => {
   )
 }
 
-const CertificateCommissionID = () => {
+const ComissionVote = ({ id }) => {
+  const [likeVotes, setLikeVote, likeStatus] = Web3Vote.stas.useVote(`like-${id}`)
+      , [dislikeVotes, setDislikeVote, dislikestatus] = Web3Vote.stas.useVote(`dislike-${id}`)
+      
+  return (
+    <Overflow>
+      <Title>useVote</Title>
+      <div style={{ display: 'flex' }}>
+        {
+          likeVotes.hasVote && dislikeVotes.hasVote
+            ? (
+              <>
+                <Button onClick={() => setLikeVote()}>{likeVotes.count} 👍</Button>
+                <Button onClick={() => setDislikeVote()}>{dislikeVotes.count} 👎</Button>
+              </>
+            )
+            : null
+        }
+        {
+          !likeVotes.hasVote 
+            ? (
+              <Button onClick={() => setLikeVote()}>{likeVotes.count} 👍</Button>
+            )
+            : null
+        }
+        {
+          !dislikeVotes.hasVote
+            ? (
+              <Button onClick={() => setDislikeVote()}>{dislikeVotes.count} 👎</Button>
+            )
+            : null
+        }
+      </div>
+      <Info>{JSON.stringify(likeStatus)}</Info>
+      <Info>{JSON.stringify(dislikestatus)}</Info>
+    </Overflow>
+  )
+}
+
+const ComissionLike = ({ id }) => {
+  const [like, setLike, status] = Web3Vote.stas.useLike(id)
+
+  return (
+    <Overflow>
+      <Title>useLike</Title>
+      <div style={{ display: 'flex' }}>
+        <Button onClick={() => setLike()}>Likes: {like.count} {like.hasLike ? '🤍' : '❤️'}</Button>
+      </div>
+      <Info>{JSON.stringify(status)}</Info>
+    </Overflow>
+  )
+}
+
+const Like = ({ id }) => {
+  const [like, setLike, status] = Web3Vote.useLike(id)
+
+  return (
+    <Overflow>
+      <Title>useLike</Title>
+      <div style={{ display: 'flex' }}>
+        <Button onClick={() => setLike()}>Likes: {like.count} {like.hasLike ? '🤍' : '❤️'}</Button>
+      </div>
+      <Info>{JSON.stringify(status)}</Info>
+    </Overflow>
+  )
+}
+
+const CertificateCommissionID = ({ provider }) => {
   const [id, setId] = useState('')
   const [commission, setCommission] = useState(0)
-  const [certificateCommission, setCertificateCommission, status] = Web3.stas.useCertificateCommissionID(id)
+  const [certificateCommission, setCertificateCommission, status] = provider(id)
 
   return (
     <Overflow>
@@ -620,8 +689,8 @@ const Navigation = ({ onChange }) => {
       <div style={{ display: 'flex' }}>
         <Button onClick={() => onChange(0)}>Storage</Button>
         <Button onClick={() => onChange(1)}>Comission storage</Button>
-        {/*<Button onClick={() => onChange(2)}>Vote</Button>
-        <Button onClick={() => onChange(3)}>Comission storage</Button>*/}
+        <Button onClick={() => onChange(2)}>Vote</Button>
+        <Button onClick={() => onChange(3)}>Comission storage</Button>
       </div>
     </Overflow>
   )
@@ -638,9 +707,12 @@ export {
     PublicText,
     ComissionInputTableText,
     InputTableText,
+    Counter,
+    ComissionCounter,
     Vote,
-    VoteSplit,
-    VoteOnce,
+    ComissionVote,
+    Like,
+    ComissionLike,
     CertificateCommissionID,
     Navigation
 }
