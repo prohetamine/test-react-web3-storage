@@ -1308,19 +1308,19 @@ react-refresh@^0.18.0:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.18.0.tgz"
   integrity sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==
 
-react-web3-storage@2.0.36:
-  version "2.0.36"
-  resolved "https://registry.yarnpkg.com/react-web3-storage/-/react-web3-storage-2.0.36.tgz#70b8e1ca3c699ccb0fe246e2f8bb70c0b254d05c"
-  integrity sha512-gBbGtwRZdcKxKCXGsfNIcu5h23XUQRkKUbgk9QwlSySjvnJl+VAJ/KrT0NxZVg/3Tw7A4V8Hxt5W9VzTznDoDA==
+react-web3-storage@2.0.37:
+  version "2.0.37"
+  resolved "https://registry.yarnpkg.com/react-web3-storage/-/react-web3-storage-2.0.37.tgz#85993aa1dcdbd4c1a916bb3d6d815b61209eedfd"
+  integrity sha512-WSpsNYwSKLIQjzT+sozoIhLsXUPc2udX5ka5QiQn6rxO/W/kjpKffS6dR40XNYud3gl5N1YJB+99WtQPU8Qnog==
   dependencies:
     murmurhash3js "^3.0.1"
     p-queue "^9.1.0"
     ws "^8.19.0"
 
-react-web3-vote@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-web3-vote/-/react-web3-vote-1.0.1.tgz#702858ae7dcc92c8b942e06350f2a724872e9439"
-  integrity sha512-6Mj2oTWkiOGk+32LBf0oqG4JxtB7f/rxazR3iBdbsZg1UMRB/zZvTCv6JXdVozN/AHrdBm5Js+4cOG8YQSZ0uw==
+react-web3-vote@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/react-web3-vote/-/react-web3-vote-1.0.11.tgz#9258ddc861dd7f35374ee348233b0d645ac8ace5"
+  integrity sha512-l0SMDnsDeMw5gyy3RLn6RCHsggoNQtN4S4Vih9nrqpbMTFTyPHtWLgPCAqY3PZS4V1R7Sip8c5R+l5JgFTVpaw==
   dependencies:
     murmurhash3js "^3.0.1"
     p-queue "^9.1.0"

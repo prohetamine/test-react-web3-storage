@@ -13,8 +13,8 @@
     "framer-motion": "^12.27.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-web3-storage": "2.0.36",
-    "react-web3-vote": "^1.0.1",
+    "react-web3-storage": "2.0.37",
+    "react-web3-vote": "1.0.11",
     "styled-components": "^6.3.8"
   },
   "devDependencies": {
