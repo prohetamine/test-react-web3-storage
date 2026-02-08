@@ -1,7 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import * as Web3 from 'react-web3-storage'
-//import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
+import { StasPayProvider } from 'stas-pay'
+//import * as Web3 from 'react-web3-storage'
+import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
 import App from './App.jsx'
 import './index.css'
 
@@ -19,7 +20,9 @@ const config = {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Web3.Provider config={config}>
-       <App />
+      <StasPayProvider>
+        <App />
+      </StasPayProvider>
     </Web3.Provider>
   </StrictMode>
 )

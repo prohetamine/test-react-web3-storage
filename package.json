@@ -15,6 +15,7 @@
     "react-dom": "^19.2.0",
     "react-web3-storage": "2.0.37",
     "react-web3-vote": "1.0.11",
+    "stas-pay": "^0.1.2",
     "styled-components": "^6.3.8"
   },
   "devDependencies": {
