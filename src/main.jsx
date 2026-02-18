@@ -26,7 +26,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Web3.Provider config={config}>
       <StasPayProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/test-react-web3-storage">
           <Routes>
             <Route path='/' element={<App />}>
               <Route index element={<UseStorage />} />
