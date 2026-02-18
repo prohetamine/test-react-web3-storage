@@ -13,9 +13,10 @@
     "framer-motion": "^12.27.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router": "^7.13.0",
     "react-web3-storage": "2.0.37",
     "react-web3-vote": "1.0.11",
-    "stas-pay": "^0.1.2",
+    "stas-pay": "^0.1.21",
     "styled-components": "^6.3.8"
   },
   "devDependencies": {
