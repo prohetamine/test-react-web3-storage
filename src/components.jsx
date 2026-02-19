@@ -169,9 +169,9 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
 
   useEffect(() => {
     if (onChange) {
-      onChange(note.state)
+      onChange(note.value)
     }
-  }, [note.state, onChange])
+  }, [note.value, onChange])
 
   const handleClick = async () => {
     const _cert = await cert.recheck()
@@ -180,7 +180,7 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
       alert('Cert error')
     }
 
-    if (_cert.state === 0 && data.stas === true) {
+    if (_cert.value === 0 && data.stas === true) {
       const commission = await cert.getCommission()
       const isConfirm = await confirm(commission)
       if (isConfirm) {
@@ -191,7 +191,7 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
     const commission = await note.getCommission()
     const isConfirm = await confirm(commission)
     if (isConfirm) {
-      const isUpdate = await note.updateState()
+      const isUpdate = await note.updateValue()
       if (!isUpdate) {
         alert('Error')
       }
@@ -215,8 +215,8 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
         <Input 
           type="text" 
           placeholder={placeholder} 
-          value={note.state} 
-          onChange={({ target: { value } }) => note.setState(value)}
+          value={note.value} 
+          onChange={({ target: { value } }) => note.setValue(value)}
         />
         <Button onClick={handleClick}>Save</Button>
       </div>
@@ -238,7 +238,7 @@ const UseList = ({ id, placeholder, data, commission: _commission }) => {
       alert('Cert error')
     }
 
-    if (_cert.state === 0 && data.stas === true) {
+    if (_cert.value === 0 && data.stas === true) {
       const commission = await cert.getCommission()
 
       const isConfirm = await confirm(commission)
@@ -250,7 +250,7 @@ const UseList = ({ id, placeholder, data, commission: _commission }) => {
     const commission = await list.getCommission()
     const isConfirm = await confirm(commission)
     if (isConfirm) {
-      const isUpdate = await list.addItem(state)
+      const isUpdate = await list.addValue(state)
       if (!isUpdate) {
         alert('Error')
       }
@@ -283,13 +283,13 @@ const UseList = ({ id, placeholder, data, commission: _commission }) => {
       <Info>{JSON.stringify(list.status)}</Info>
       <div>
         {
-          list.items.map((item, key) => (
+          list.value.map((item, key) => (
             <Data key={key}>
               <span>
                 {item.text}
                 <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)} chainId: {item.chainId})</span> 
-                <SButton onClick={() => list.updateItem(item.index, state)}>edit</SButton>
-                <SButton onClick={() => list.updateItem(item.index, "")}>delete</SButton>
+                <SButton onClick={() => list.updateValue(item.index, state)}>edit</SButton>
+                <SButton onClick={() => list.updateValue(item.index, "")}>delete</SButton>
                 {item.hasEdit ? '(Edit)' : '(NO Edit)'}
               </span>
             </Data>
@@ -305,9 +305,9 @@ const UseReadNote = ({ id, onChange, data, placeholder }) => {
 
   useEffect(() => {
     if (onChange) {
-      onChange(note.state)
+      onChange(note.value)
     }
-  }, [note.state, onChange])
+  }, [note.value, onChange])
 
   return (
     <Overflow
@@ -322,7 +322,7 @@ const UseReadNote = ({ id, onChange, data, placeholder }) => {
       }}
     >
       <Title>useReadNote("{id}", {JSON.stringify(data)})</Title>
-      <Data style={{ color: note.state ? '#fff' : '#909090' }}>{note.state || placeholder}</Data>
+      <Data style={{ color: note.value ? '#fff' : '#909090' }}>{note.value || placeholder}</Data>
       <Info>{JSON.stringify(note.status)}</Info>
     </Overflow>
   )
@@ -340,7 +340,7 @@ const UseCounter = ({ id, data, placeholder, commission: _commission }) => {
       alert('Cert error')
     }
 
-    if (_cert.state === 0 && data.stas === true) {
+    if (_cert.value === 0 && data.stas === true) {
       const commission = await cert.getCommission()
       const isConfirm = await confirm(commission)
       if (isConfirm) {
@@ -372,7 +372,7 @@ const UseCounter = ({ id, data, placeholder, commission: _commission }) => {
     >
       <Title>useCounter("{id}", {JSON.stringify(data)})</Title>
       <div style={{ display: 'flex' }}>
-        <Button onClick={handleClick}>{placeholder}: {counter.state.count} {counter.state.voted ? '(voted)' : ''}</Button>
+        <Button onClick={handleClick}>{placeholder}: {counter.value.count} {counter.value.voted ? '(voted)' : ''}</Button>
       </div>
       <Info>{JSON.stringify(counter.status)}</Info>
     </Overflow>
