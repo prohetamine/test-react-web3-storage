@@ -1,88 +1,80 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-empty */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
+import { Body, UseReadNote } from './components.jsx'
 
-import {
-    Body,
-    UseReadStorage,
-} from './components.jsx'
-
-const _UseReadStorage = () => {
+const _UseReadNote = () => {
   const address = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
 
   return (
     <Body>
       <div>
-        <UseReadStorage 
-          id='us-[empty]' 
+        <UseReadNote 
+          id='un-[empty]' 
           data={{ }}
           placeholder='empty NO WRITE ME'
         />
-        <UseReadStorage 
-          id='us-[empty-allow-write]' 
+        <UseReadNote 
+          id='un-[empty-allow-write]' 
           data={{ }}
           placeholder='Write here'
         />
-        <UseReadStorage 
-          id='us-[value]' 
+        <UseReadNote 
+          id='un-[value]' 
           data={{ value: 'Custom value' }}
           placeholder={`Value...`}
         />
-        <UseReadStorage 
-          id='us-[address]' 
+        <UseReadNote 
+          id='un-[address]' 
           data={{ address }}
           placeholder={`Address... ${address}`}
         />
-        <UseReadStorage 
-          id='us-[load]'
+        <UseReadNote 
+          id='un-[load]'
           data={{ watch: false }}
           placeholder='Load... read me only'
         />
-        <UseReadStorage 
-          id='us-[load]'
+        <UseReadNote 
+          id='un-[load]'
           data={{ watch: true, interval: 5000 }}
           placeholder='Load... read me only'
         />
-        <UseReadStorage 
-          id='us-[once]' 
+        <UseReadNote 
+          id='un-[once]' 
           data={{ once: true }} 
           placeholder='Once write here!'
         />
-        <UseReadStorage 
-          id='us-[self]' 
+        <UseReadNote 
+          id='un-[self]' 
           data={{ self: true }} 
           placeholder='Self - text for you!'
         />
-        <UseReadStorage 
-          id='us-[stas]' 
+        <UseReadNote 
+          id='un-[stas]' 
           data={{ stas: true }} 
           commission={9} 
           placeholder='Write? Pay 10 STAS coin'
         />
-        <UseReadStorage 
-          id='us-[stas]' 
+        <UseReadNote 
+          id='un-[stas]' 
           data={{ stas: true, copyId: 1 }} 
           commission={9} 
           placeholder='Write? Pay 10 STAS coin (COPY)'
         />
-        <UseReadStorage 
-          id='us-[random-hash]' 
+        <UseReadNote 
+          id='un-[random-hash]' 
           data={{ randomHash: true }}
           placeholder='Write and generate random hash...'
         />
-        <UseReadStorage 
-          id='us-[random-hash-for-address]' 
+        <UseReadNote 
+          id='un-[random-hash-for-address]' 
           data={{ randomHash: true, address }}
           placeholder='Write and generate random hash...'
         />
-        <UseReadStorage 
-          id='us-[cache]' 
+        <UseReadNote 
+          id='un-[cache]' 
           data={{ cache: 9999999999 }}
           placeholder='Write and ... cache'
         />
-        <UseReadStorage 
-          id='us-[cache]' 
+        <UseReadNote 
+          id='un-[cache]' 
           data={{ }}
           placeholder='Read ... cache'
         />
@@ -91,4 +83,4 @@ const _UseReadStorage = () => {
   )
 }
 
-export default _UseReadStorage
+export default _UseReadNote

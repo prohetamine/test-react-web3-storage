@@ -1,14 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { StasPayProvider } from 'stas-pay'
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router'
+import { BrowserRouter, Routes, Route } from 'react-router'
 //import * as Web3 from 'react-web3-storage'
 import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
 import App from './App.jsx'
-import UseStorage from './UseStorage.jsx'
-import UseReadStorage from './UseReadStorage.jsx'
-import UseTableStorage from './UseTableStorage.jsx'
-import UseVote from './UseVote.jsx'
+import UseNote from './UseNote.jsx'
+import UseReadNote from './UseReadNote.jsx'
+import UseList from './UseList.jsx'
+import UseCounter from './UseCounter.jsx'
 import './index.css'
 
 const config = {
@@ -29,10 +29,10 @@ createRoot(document.getElementById('root')).render(
         <BrowserRouter basename="/test-react-web3-storage">
           <Routes>
             <Route path='/' element={<App />}>
-              <Route index element={<UseStorage />} />
-              <Route path='/use-read-storage' element={<UseReadStorage />} />
-              <Route path='/use-table-storage' element={<UseTableStorage />} />
-              <Route path='/use-vote' element={<UseVote />} />
+              <Route index element={<UseNote />} />
+              <Route path='/use-read-note' element={<UseReadNote />} />
+              <Route path='/use-list' element={<UseList />} />
+              <Route path='/use-counter' element={<UseCounter />} />
             </Route>
           </Routes>
         </BrowserRouter>

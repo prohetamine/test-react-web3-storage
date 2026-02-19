@@ -5,9 +5,7 @@ import { Link } from 'react-router'
 import { useStasPay } from 'stas-pay'
 
 //import * as Web3 from 'react-web3-storage'
-//import * as Web3Vote from 'react-web3-vote'
 import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
-import * as Web3Vote from '/Users/stas/Desktop/react-web3-vote'
 
 const Body = styled.div`
   width: 100%;
@@ -149,31 +147,31 @@ const Navigation = () => (
   <Overflow>
     <div style={{ display: 'flex' }}>
       <Link to='/'>
-        <Button>useStorage</Button>
+        <Button>useNote</Button>
       </Link>
-      <Link to='/use-read-storage'>
-        <Button>useReadStorage</Button>
+      <Link to='/use-read-note'>
+        <Button>useReadNote</Button>
       </Link>
-      <Link to='/use-table-storage'>
-        <Button >useTableStorage</Button>
+      <Link to='/use-list'>
+        <Button >useList</Button>
       </Link>
-      <Link to='/use-vote'>
-        <Button>useVote</Button>
+      <Link to='/use-counter'>
+        <Button>useCounter</Button>
       </Link>
     </div>
   </Overflow>
 )
 
-const UseStorage = ({ id, onChange, placeholder, data, commission: _commission }) => {
-  const storage = Web3.useStorage(id, data)
+const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) => {
+  const note = Web3.useNote(id, data)
       , cert = Web3.useCertificateCommissionID(id)
       , confirm = useStasPay()
 
   useEffect(() => {
     if (onChange) {
-      onChange(storage.state)
+      onChange(note.state)
     }
-  }, [storage, onChange])
+  }, [note.state, onChange])
 
   const handleClick = async () => {
     const _cert = await cert.recheck()
@@ -190,10 +188,10 @@ const UseStorage = ({ id, onChange, placeholder, data, commission: _commission }
       }
     }
 
-    const commission = await storage.getCommission()
+    const commission = await note.getCommission()
     const isConfirm = await confirm(commission)
     if (isConfirm) {
-      const isUpdate = await storage.updateState()
+      const isUpdate = await note.updateState()
       if (!isUpdate) {
         alert('Error')
       }
@@ -203,37 +201,33 @@ const UseStorage = ({ id, onChange, placeholder, data, commission: _commission }
   return (
     <Overflow
       style={{ 
-        border: storage.status.type === 'loaded' 
-                    ? '3px solid rgba(65, 206, 0, 1)'
-                    : storage.status.type === 'load' 
+        border: note.status === 'success' 
+                  ? '3px solid rgba(65, 206, 0, 1)'
+                  : note.status === 'pending' 
                       ? '3px solid rgba(232, 205, 0, 1)'
-                      : storage.status.type === 'upload' 
-                        ? '3px solid rgb(0, 131, 232)'
-                        : storage.status.type === 'uploaded' 
-                          ? '3px solid rgb(0, 12, 232)'
-                          : storage.status.type === 'error'
-                            ? '3px solid rgba(232, 0, 31, 1)'
-                            : '3px solid #00000000'
+                      : note.status === 'error'
+                          ? '3px solid rgba(232, 0, 31, 1)'
+                          : '3px solid #00000000'
       }}
     > 
-      <Title>useStorage("{id}", {JSON.stringify(data)})</Title>
+      <Title>useNote("{id}", {JSON.stringify(data)})</Title>
       <div style={{ display: 'flex' }}>
         <Input 
           type="text" 
           placeholder={placeholder} 
-          value={storage.state} 
-          onChange={({ target: { value } }) => storage.setState(value)}
+          value={note.state} 
+          onChange={({ target: { value } }) => note.setState(value)}
         />
         <Button onClick={handleClick}>Save</Button>
       </div>
-      <Info>{JSON.stringify(storage.status)}</Info>
+      <Info>{JSON.stringify(note.status)}</Info>
     </Overflow>
   )
 }
 
-const UseTableStorage = ({ id, placeholder, data, commission: _commission }) => {
+const UseList = ({ id, placeholder, data, commission: _commission }) => {
   const [state, setState] = useState('')
-  const tableStorage = Web3.useTableStorage(id, data)
+  const list = Web3.useList(id, data)
       , cert = Web3.useCertificateCommissionID(id)
       , confirm = useStasPay()
 
@@ -253,10 +247,10 @@ const UseTableStorage = ({ id, placeholder, data, commission: _commission }) => 
       }
     }
 
-    const commission = await tableStorage.getCommission()
+    const commission = await list.getCommission()
     const isConfirm = await confirm(commission)
     if (isConfirm) {
-      const isUpdate = await tableStorage.addItem(state)
+      const isUpdate = await list.addItem(state)
       if (!isUpdate) {
         alert('Error')
       }
@@ -266,21 +260,17 @@ const UseTableStorage = ({ id, placeholder, data, commission: _commission }) => 
   return (
     <Overflow
       style={{ 
-        border: tableStorage.status.type === 'loaded' 
-                    ? '3px solid rgba(65, 206, 0, 1)'
-                    : tableStorage.status.type === 'load' 
+        border: list.status === 'success' 
+                  ? '3px solid rgba(65, 206, 0, 1)'
+                  : list.status === 'pending' 
                       ? '3px solid rgba(232, 205, 0, 1)'
-                      : tableStorage.status.type === 'upload' 
-                        ? '3px solid rgb(0, 131, 232)'
-                        : tableStorage.status.type === 'uploaded' 
-                          ? '3px solid rgb(0, 12, 232)'
-                          : tableStorage.status.type === 'error'
-                            ? '3px solid rgba(232, 0, 31, 1)'
-                            : '3px solid #00000000'
+                      : list.status === 'error'
+                          ? '3px solid rgba(232, 0, 31, 1)'
+                          : '3px solid #00000000'
       }}
     >
 
-      <Title>UseTableStorage("{id}", {JSON.stringify(data)})</Title>
+      <Title>UseList("{id}", {JSON.stringify(data)})</Title>
       <div style={{ display: 'flex' }}>
         <Input 
           type="text"
@@ -290,16 +280,16 @@ const UseTableStorage = ({ id, placeholder, data, commission: _commission }) => 
         />
         <Button onClick={handleClick}>Save</Button>
       </div>
-      <Info>{JSON.stringify(tableStorage.status)}</Info>
+      <Info>{JSON.stringify(list.status)}</Info>
       <div>
         {
-          tableStorage.items.map((item, key) => (
+          list.items.map((item, key) => (
             <Data key={key}>
               <span>
                 {item.text}
                 <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)} chainId: {item.chainId})</span> 
-                <SButton onClick={() => tableStorage.updateItem(item.index, state)}>edit</SButton>
-                <SButton onClick={() => tableStorage.updateItem(item.index, "")}>delete</SButton>
+                <SButton onClick={() => list.updateItem(item.index, state)}>edit</SButton>
+                <SButton onClick={() => list.updateItem(item.index, "")}>delete</SButton>
                 {item.hasEdit ? '(Edit)' : '(NO Edit)'}
               </span>
             </Data>
@@ -310,41 +300,37 @@ const UseTableStorage = ({ id, placeholder, data, commission: _commission }) => 
   )
 }
 
-const UseReadStorage = ({ id, onChange, data, placeholder }) => {
-  const storage = Web3.useReadStorage(id, data)
+const UseReadNote = ({ id, onChange, data, placeholder }) => {
+  const note = Web3.useReadNote(id, data)
 
   useEffect(() => {
     if (onChange) {
-      onChange(storage.state)
+      onChange(note.state)
     }
-  }, [storage, onChange])
+  }, [note.state, onChange])
 
   return (
     <Overflow
       style={{ 
-        border: storage.status.type === 'loaded' 
+        border: note.status === 'success' 
                   ? '3px solid rgba(65, 206, 0, 1)'
-                  : storage.status.type === 'load' 
-                    ? '3px solid rgba(232, 205, 0, 1)'
-                    : storage.status.type === 'upload' 
-                      ? '3px solid rgb(0, 131, 232)'
-                      : storage.status.type === 'uploaded' 
-                        ? '3px solid rgb(0, 12, 232)'
-                        : storage.status.type === 'error'
+                  : note.status === 'pending' 
+                      ? '3px solid rgba(232, 205, 0, 1)'
+                      : note.status === 'error'
                           ? '3px solid rgba(232, 0, 31, 1)'
                           : '3px solid #00000000'
       }}
     >
-      <Title>useReadStorage("{id}", {JSON.stringify(data)})</Title>
-      <Data style={{ color: storage.state ? '#fff' : '#909090' }}>{storage.state || placeholder}</Data>
-      <Info>{JSON.stringify(storage.status)}</Info>
+      <Title>useReadNote("{id}", {JSON.stringify(data)})</Title>
+      <Data style={{ color: note.state ? '#fff' : '#909090' }}>{note.state || placeholder}</Data>
+      <Info>{JSON.stringify(note.status)}</Info>
     </Overflow>
   )
 }
 
-const UseVote = ({ id, data, placeholder, commission: _commission }) => {
-  const storage = Web3Vote.useVote(id, data)
-      , cert = Web3Vote.useCertificateCommissionID(id)
+const UseCounter = ({ id, data, placeholder, commission: _commission }) => {
+  const counter = Web3.useCounter(id, data)
+      , cert = Web3.useCertificateCommissionID(id)
       , confirm = useStasPay()
 
   const handleClick = async () => {
@@ -362,10 +348,10 @@ const UseVote = ({ id, data, placeholder, commission: _commission }) => {
       }
     }
 
-    const commission = await storage.getCommission()
+    const commission = await counter.getCommission()
     const isConfirm = await confirm(commission)
     if (isConfirm) {
-      const isUpdate = await storage.updateState()
+      const isUpdate = await counter.updateState()
       if (!isUpdate) {
         alert('Error')
       }
@@ -375,24 +361,20 @@ const UseVote = ({ id, data, placeholder, commission: _commission }) => {
   return (
     <Overflow
       style={{ 
-        border: storage.status.type === 'loaded' 
+        border: counter.status === 'success' 
                   ? '3px solid rgba(65, 206, 0, 1)'
-                  : storage.status.type === 'load' 
-                    ? '3px solid rgba(232, 205, 0, 1)'
-                    : storage.status.type === 'upload' 
-                      ? '3px solid rgb(0, 131, 232)'
-                      : storage.status.type === 'uploaded' 
-                        ? '3px solid rgb(0, 12, 232)'
-                        : storage.status.type === 'error'
+                  : counter.status === 'pending' 
+                      ? '3px solid rgba(232, 205, 0, 1)'
+                      : counter.status === 'error'
                           ? '3px solid rgba(232, 0, 31, 1)'
                           : '3px solid #00000000'
       }}
     >
-      <Title>useVote("{id}", {JSON.stringify(data)})</Title>
+      <Title>useCounter("{id}", {JSON.stringify(data)})</Title>
       <div style={{ display: 'flex' }}>
-        <Button onClick={handleClick}>{placeholder}: {storage.state.count} {storage.state.voted ? '(voted)' : ''}</Button>
+        <Button onClick={handleClick}>{placeholder}: {counter.state.count} {counter.state.voted ? '(voted)' : ''}</Button>
       </div>
-      <Info>{JSON.stringify(storage.status)}</Info>
+      <Info>{JSON.stringify(counter.status)}</Info>
     </Overflow>
   )
 }
@@ -401,8 +383,8 @@ export {
     Body,
     WalletButton,
     Navigation,
-    UseStorage,
-    UseTableStorage,
-    UseReadStorage,
-    UseVote
+    UseNote,
+    UseList,
+    UseReadNote,
+    UseCounter
 }

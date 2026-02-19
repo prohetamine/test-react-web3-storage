@@ -1,91 +1,83 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-empty */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
+import { Body, UseCounter } from './components.jsx'
 
-import {
-    Body,
-    UseVote,
-} from './components.jsx'
-
-const _UseVote = () => {
+const _UseCounter = () => {
   return (
     <Body>
       <div>
-        <UseVote 
-          id='uv-[empty]' 
+        <UseCounter 
+          id='uc-[empty]' 
           data={{ }}
           placeholder='empty NO CLICK ME'
         />
-        <UseVote 
-          id='uv-[empty-allow-click]' 
+        <UseCounter 
+          id='uc-[empty-allow-click]' 
           data={{ }}
           placeholder='Click here'
         />
-        <UseVote 
-          id='uv-[value]' 
+        <UseCounter 
+          id='uc-[value]' 
           data={{ value: { count: 99999, voted: false } }}
           placeholder={`Value... vote`}
         />
-        <UseVote 
-          id='uv-[load]' 
+        <UseCounter 
+          id='uc-[load]' 
           data={{ load: false }}
           placeholder='Load... vote me only'
         />
-        <UseVote 
-          id='uv-[load]' 
+        <UseCounter 
+          id='uc-[load]' 
           data={{ load: true }}
           placeholder='Load... read vote me only'
         />
-        <UseVote 
-          id='uv-[load]'
+        <UseCounter 
+          id='uc-[load]'
           data={{ watch: false }}
           placeholder='Load... read vote me only'
         />
-        <UseVote 
-          id='uv-[load]'
+        <UseCounter 
+          id='uc-[load]'
           data={{ watch: true, interval: 5000 }}
           placeholder='Load... read vote me only'
         />
-        <UseVote 
-          id='uv-[once]' 
+        <UseCounter 
+          id='uc-[once]' 
           data={{ once: true }} 
           placeholder='Once vote here!'
         />
-        <UseVote 
-          id='uv-[self]' 
+        <UseCounter 
+          id='uc-[self]' 
           data={{ self: true }} 
           placeholder='Self - vote for you!'
         />
-        <UseVote 
-          id='uv-[stas]' 
+        <UseCounter 
+          id='uc-[stas]' 
           data={{ stas: true }} 
           commission={2} 
           placeholder='Vote? Pay 3 STAS coin'
         />
-        <UseVote 
-          id='uv-[stas]' 
+        <UseCounter 
+          id='uc-[stas]' 
           data={{ stas: true, copyId: 1 }} 
           commission={2} 
           placeholder='Vote? Pay 3 STAS coin (COPY)'
         />
-        <UseVote 
-          id='uv-[switching]' 
+        <UseCounter 
+          id='uc-[switching]' 
           data={{ switching: true }}
           placeholder='Switching vote (like)...'
         />
-        <UseVote 
-          id='uv-[single]' 
+        <UseCounter 
+          id='uc-[single]' 
           data={{ single: true }}
           placeholder='Vote only you!'
         />
-        <UseVote 
-          id='uv-[cache]' 
+        <UseCounter 
+          id='uc-[cache]' 
           data={{ cache: 9999999999 }}
           placeholder='Vote and ... cache'
         />
-        <UseVote 
-          id='uv-[cache]' 
+        <UseCounter 
+          id='uc-[cache]' 
           data={{ }}
           placeholder='Read vote ... cache'
         />
@@ -94,4 +86,4 @@ const _UseVote = () => {
   )
 }
 
-export default _UseVote
+export default _UseCounter
