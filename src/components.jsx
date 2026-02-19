@@ -174,7 +174,7 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
   }, [note.value, onChange])
 
   const handleClick = async () => {
-    const _cert = await cert.recheck()
+    const _cert = await cert.recheckValue()
 
     if (!_cert) {
       alert('Cert error')
@@ -184,7 +184,7 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
       const commission = await cert.getCommission()
       const isConfirm = await confirm(commission)
       if (isConfirm) {
-        await cert.updateState(_commission)
+        await cert.updateValue(_commission)
       }
     }
 
@@ -232,7 +232,7 @@ const UseList = ({ id, placeholder, data, commission: _commission }) => {
       , confirm = useStasPay()
 
   const handleClick = async () => {
-    const _cert = await cert.recheck()
+    const _cert = await cert.recheckValue()
 
     if (!_cert) {
       alert('Cert error')
@@ -243,7 +243,7 @@ const UseList = ({ id, placeholder, data, commission: _commission }) => {
 
       const isConfirm = await confirm(commission)
       if (isConfirm) {
-        await cert.updateState(_commission)
+        await cert.updateValue(_commission)
       }
     }
 
@@ -334,7 +334,7 @@ const UseCounter = ({ id, data, placeholder, commission: _commission }) => {
       , confirm = useStasPay()
 
   const handleClick = async () => {
-    const _cert = await cert.recheck()
+    const _cert = await cert.recheckValue()
 
     if (!_cert) {
       alert('Cert error')
@@ -344,14 +344,14 @@ const UseCounter = ({ id, data, placeholder, commission: _commission }) => {
       const commission = await cert.getCommission()
       const isConfirm = await confirm(commission)
       if (isConfirm) {
-        await cert.updateState(_commission)
+        await cert.updateValue(_commission)
       }
     }
 
     const commission = await counter.getCommission()
     const isConfirm = await confirm(commission)
     if (isConfirm) {
-      const isUpdate = await counter.updateState()
+      const isUpdate = await counter.updateValue()
       if (!isUpdate) {
         alert('Error')
       }
