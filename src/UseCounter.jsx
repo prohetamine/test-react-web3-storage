@@ -1,6 +1,8 @@
 import { Body, UseCounter } from './components.jsx'
 
 const _UseCounter = () => {
+  const address = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
+
   return (
     <Body>
       <div>
@@ -48,6 +50,16 @@ const _UseCounter = () => {
           id='uc-[self]' 
           data={{ self: true }} 
           placeholder='Self - vote for you!'
+        />
+        <UseCounter 
+          id='un-[self-read]' 
+          data={{ self: true, selfRead: true }} 
+          placeholder='Self - vote you and read people!'
+        />
+        <UseCounter 
+          id='un-[self-read]' 
+          data={{ self: true, selfRead: true, address }} 
+          placeholder='Self - vote you and read people!'
         />
         <UseCounter 
           id='uc-[stas]' 

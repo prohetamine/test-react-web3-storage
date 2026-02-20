@@ -1,6 +1,8 @@
 import { Body, UseList } from './components.jsx'
 
 const _UseList = () => {
+  const address = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
+
   return (
     <Body>
       <div>
@@ -43,6 +45,16 @@ const _UseList = () => {
           id='uts-[self]' 
           data={{ self: true }} 
           placeholder='Self - text for you!'
+        />
+        <UseList 
+          id='uts-[self-read]' 
+          data={{ self: true, selfRead: true }} 
+          placeholder='Self - write text and read people!'
+        />
+        <UseList 
+          id='uts-[self-read]' 
+          data={{ self: true, selfRead: true, address }} 
+          placeholder='Self - write text you and read people!'
         />
         <UseList 
           id='uts-[stas]' 

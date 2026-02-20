@@ -7,6 +7,11 @@ const _UseReadNote = () => {
     <Body>
       <div>
         <UseReadNote 
+          id={null} 
+          data={{ primaryId: 'PNS', address: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' }}
+          placeholder='PRIMARY WRITE ME!'
+        />
+        <UseReadNote 
           id='un-[empty]' 
           data={{ }}
           placeholder='empty NO WRITE ME'
@@ -45,6 +50,21 @@ const _UseReadNote = () => {
           id='un-[self]' 
           data={{ self: true }} 
           placeholder='Self - text for you!'
+        />
+        <UseReadNote 
+          id='un-[self-read]' 
+          data={{ self: true, selfRead: true }} 
+          placeholder='Self read - write text you and read people!'
+        />
+        <UseReadNote 
+          id='un-[self-read]' 
+          data={{ self: true, selfRead: true, address }} 
+          placeholder='Self read - write text you and read people!'
+        />
+        <UseReadNote 
+          id='un-[single]' 
+          data={{ single: true }} 
+          placeholder='Single read'
         />
         <UseReadNote 
           id='un-[stas]' 
