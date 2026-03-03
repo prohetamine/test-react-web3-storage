@@ -3,10 +3,11 @@ import { createRoot } from 'react-dom/client'
 import { StasPayProvider } from 'stas-pay'
 import { BrowserRouter, Routes, Route } from 'react-router'
 //import * as Web3 from 'react-web3-storage'
-import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
+import * as Web3 from '/Users/stas/Desktop/redstone'
 import App from './App.jsx'
 import UseNote from './UseNote.jsx'
 import UseReadNote from './UseReadNote.jsx'
+import UseReadListItem from './UseReadListItem.jsx'
 import UseList from './UseList.jsx'
 import UseCounter from './UseCounter.jsx'
 import './index.css'
@@ -32,6 +33,7 @@ createRoot(document.getElementById('root')).render(
               <Route index element={<UseNote />} />
               <Route path='/use-read-note' element={<UseReadNote />} />
               <Route path='/use-list' element={<UseList />} />
+              <Route path='/use-read-list-item' element={<UseReadListItem />} />
               <Route path='/use-counter' element={<UseCounter />} />
             </Route>
           </Routes>

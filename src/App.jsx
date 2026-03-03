@@ -1,5 +1,5 @@
 //import * as Web3 from 'react-web3-storage'
-import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
+import * as Web3 from '/Users/stas/Desktop/redstone'
 import { Outlet } from 'react-router'
 
 import {

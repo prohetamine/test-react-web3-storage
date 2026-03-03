@@ -4,8 +4,8 @@ import { styled } from 'styled-components'
 import { Link } from 'react-router'
 import { useStasPay } from 'stas-pay'
 
-//import * as Web3 from 'react-web3-storage'
-import * as Web3 from '/Users/stas/Desktop/react-web3-storage'
+//import * as Redstone from 'redstone'
+import * as Redstone from '/Users/stas/Desktop/redstone'
 
 const Body = styled.div`
   width: 100%;
@@ -153,7 +153,10 @@ const Navigation = () => (
         <Button>useReadNote</Button>
       </Link>
       <Link to='/use-list'>
-        <Button >useList</Button>
+        <Button>useList</Button>
+      </Link>
+      <Link to='/use-read-list-item'>
+        <Button>useReadListItem</Button>
       </Link>
       <Link to='/use-counter'>
         <Button>useCounter</Button>
@@ -163,8 +166,8 @@ const Navigation = () => (
 )
 
 const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) => {
-  const note = Web3.useNote(id, data)
-      , cert = Web3.useCertificateCommissionID(id)
+  const note = Redstone.useNote(id, data)
+      , cert = Redstone.useCertificateCommissionID(id)
       , confirm = useStasPay()
 
   useEffect(() => {
@@ -227,8 +230,8 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
 
 const UseList = ({ id, placeholder, data, commission: _commission }) => {
   const [state, setState] = useState('')
-  const list = Web3.useList(id, data)
-      , cert = Web3.useCertificateCommissionID(id)
+  const list = Redstone.useList(id, data)
+      , cert = Redstone.useCertificateCommissionID(id)
       , confirm = useStasPay()
 
   const handleClick = async () => {
@@ -288,8 +291,8 @@ const UseList = ({ id, placeholder, data, commission: _commission }) => {
               <span>
                 {item.text}
                 <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)} chainId: {item.chainId})</span> 
-                <SButton onClick={() => list.updateValue(item.index, state)}>edit</SButton>
-                <SButton onClick={() => list.updateValue(item.index, "")}>delete</SButton>
+                <SButton onClick={() => list.updateValue(item.index, item.chainId, state)}>edit</SButton>
+                <SButton onClick={() => list.updateValue(item.index, item.chainId, "")}>delete</SButton>
                 {item.hasEdit ? '(Edit)' : '(NO Edit)'}
               </span>
             </Data>
@@ -301,7 +304,7 @@ const UseList = ({ id, placeholder, data, commission: _commission }) => {
 }
 
 const UseReadNote = ({ id, onChange, data, placeholder }) => {
-  const note = Web3.useReadNote(id, data)
+  const note = Redstone.useReadNote(id, data)
 
   useEffect(() => {
     if (onChange) {
@@ -328,9 +331,50 @@ const UseReadNote = ({ id, onChange, data, placeholder }) => {
   )
 }
 
+const UseReadListItem = ({ id, onChange, data }) => {
+  const item = Redstone.useReadListItem(id, data)
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(item.value)
+    }
+  }, [item.value, onChange])
+
+  return (
+    <Overflow
+      style={{ 
+        border: item.status === 'success' 
+                  ? '3px solid rgba(65, 206, 0, 1)'
+                  : item.status === 'pending' 
+                      ? '3px solid rgba(232, 205, 0, 1)'
+                      : item.status === 'error'
+                          ? '3px solid rgba(232, 0, 31, 1)'
+                          : '3px solid #00000000'
+      }}
+    >
+
+      <Title>UseReadListItem("{id}", {JSON.stringify(data)})</Title>
+      <Info>{JSON.stringify(item.status)}</Info>
+      <div>
+        {
+          item.value && [item.value].map((item, key) => (
+            <Data key={key}>
+              <span>
+                {item.text}
+                <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)} chainId: {item.chainId})</span> 
+                {item.hasEdit ? '(Edit)' : '(NO Edit)'}
+              </span>
+            </Data>
+          ))
+        }
+      </div>
+    </Overflow>
+  )
+}
+
 const UseCounter = ({ id, data, placeholder, commission: _commission }) => {
-  const counter = Web3.useCounter(id, data)
-      , cert = Web3.useCertificateCommissionID(id)
+  const counter = Redstone.useCounter(id, data)
+      , cert = Redstone.useCertificateCommissionID(id)
       , confirm = useStasPay()
 
   const handleClick = async () => {
@@ -386,5 +430,6 @@ export {
     UseNote,
     UseList,
     UseReadNote,
+    UseReadListItem,
     UseCounter
 }

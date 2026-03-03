@@ -8,7 +8,7 @@ const _UseNote = () => {
       <div>
         <UseNote 
           id={null} 
-          data={{ primaryId: 'PNS' }}
+          data={{ primaryId: 'id-without-hash' }}
           placeholder='PRIMARY WRITE ME!'
         />
         <UseNote 
