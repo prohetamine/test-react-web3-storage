@@ -291,8 +291,8 @@ const UseList = ({ id, placeholder, data, commission: _commission }) => {
               <span>
                 {item.text}
                 <span style={{ marginLeft: '5px', color: '#999' }}>(index: {item.index} addr: {item.address.slice(0, 7)} chainId: {item.chainId})</span> 
-                <SButton onClick={() => list.updateValue(item.index, item.chainId, state)}>edit</SButton>
-                <SButton onClick={() => list.updateValue(item.index, item.chainId, "")}>delete</SButton>
+                <SButton onClick={() => list.updateValue(item, state)}>edit</SButton>
+                <SButton onClick={() => list.updateValue(item, item.chainId, "")}>delete</SButton>
                 {item.hasEdit ? '(Edit)' : '(NO Edit)'}
               </span>
             </Data>
