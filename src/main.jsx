@@ -20,7 +20,7 @@ const config = {
     icons: ['https://prohetamine.github.io/react-web3-storage/icon.svg']
   },
   projectId: '1febfd92481d4ea997711d2ac4a363c0',
-  host: window.location.host+'/react-web3-storage/'
+  host: '/react-web3-storage/'
 }
 
 createRoot(document.getElementById('root')).render(
