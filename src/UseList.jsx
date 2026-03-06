@@ -7,6 +7,11 @@ const _UseList = () => {
     <Body>
       <div>
         <UseList 
+          id={null} 
+          data={{ primaryId: 'id-without-hash', copyId: 'hello', addressValue: true }}
+          placeholder='PNS'
+        />
+        <UseList 
           id='uts-[empty]'
           data={{ }}
           placeholder='empty NO WRITE ME'
