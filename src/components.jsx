@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
@@ -166,6 +167,8 @@ const Navigation = () => (
 )
 
 const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) => {
+  const [value, setValue] = useState('')
+
   const note = Redstone.useNote(id, data)
       , cert = Redstone.useCertificateCommissionID(id)
       , confirm = useStasPay()
@@ -175,6 +178,12 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
       onChange(note.value)
     }
   }, [note.value, onChange])
+
+  useEffect(() => {
+    if (note.status === 'success' && note.value !== value) {
+      setValue(note.value)
+    }
+  }, [note.status, note.value, setValue])
 
   const handleClick = async () => {
     const _cert = await cert.recheckValue()
@@ -194,7 +203,7 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
     const commission = await note.getCommission()
     const isConfirm = await confirm(commission)
     if (isConfirm) {
-      const isUpdate = await note.updateValue()
+      const isUpdate = await note.updateValue(value)
       if (!isUpdate) {
         alert('Error')
       }
@@ -218,8 +227,8 @@ const UseNote = ({ id, onChange, placeholder, data, commission: _commission }) =
         <Input 
           type="text" 
           placeholder={placeholder} 
-          value={note.value} 
-          onChange={({ target: { value } }) => note.setValue(value)}
+          value={value} 
+          onChange={({ target: { value } }) => setValue(value)}
         />
         <Button onClick={handleClick}>Save</Button>
       </div>
